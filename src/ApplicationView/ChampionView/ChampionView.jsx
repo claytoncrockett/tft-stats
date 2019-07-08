@@ -1,9 +1,14 @@
 import React from "react";
-import championsJson from "../../champions.json";
+import championsJson from "../../json/champions.json";
 import {
   ChampionTile,
   ChampionContainer
 } from "./ChampionViewStyledComponents.js";
+import items from "../../json/items.json";
+
+const findItemName = item => {
+  return items[item].name;
+};
 
 export const ChampionView = ({ search }) => {
   let champions = [];
@@ -15,14 +20,18 @@ export const ChampionView = ({ search }) => {
           if (champion.name.toLowerCase().includes(search.toLowerCase()))
             return (
               <ChampionTile key={i}>
-                <div>{champion.name}</div>
+                <div style={{ fontWeight: "700" }}>{champion.name}</div>
                 <div>Class: {champion.class[0]}</div>
                 <div>Origin: {champion.origin[0]}</div>
                 <div>Cost: {champion.cost}</div>
-                <div>
+                <div style={{ fontWeight: "700" }}>
                   Recommended Items:{" "}
                   {champion.items.map((item, i) => {
-                    return <div key={i}>{item}</div>;
+                    return (
+                      <div style={{ fontWeight: "400" }} key={i}>
+                        {findItemName(item)}
+                      </div>
+                    );
                   })}
                 </div>
               </ChampionTile>

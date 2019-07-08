@@ -3,20 +3,14 @@ import { SearchBar } from "./SearchBar/SearchBar";
 import { ChampionView } from "./ChampionView/ChampionView";
 
 class ApplicationView extends React.Component {
-  state = { search: "" };
-
-  onSearchChange = value => {
-    this.setState({ search: value });
-  };
-
   render() {
     return (
       <>
         <SearchBar
-          onSearchChange={this.onSearchChange}
-          search={this.state.search}
+          onSearchChange={this.props.onSearchChange}
+          search={this.props.search}
         />
-        <ChampionView search={this.state.search} />
+        {this.props.children}
       </>
     );
   }
